@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DI-TRAB3</title>
+</head>
+<body>
+    <select name="pais" id="pais">
+        <option selected="selected">Selecione um país</option>
+    </select>
+    <div>Add dados do pais</div>
+    <div>
+        <h2>Feriados</h2>
+        <div id="feriados"></div>
+    </div>
+    <div>
+        <h2>Pesquisar por cidade</h2>
+        <input type="text" id="cidade" placeholder="Digite o nome da cidade">
+        <button id="consultar-cidade">Consultar</button>
+        <div id="cidades"></div>
+    </div>
+    <script type="module" src="/json.js"></script>
+    <script type="module" src="/dom.js"></script>
+    <script type="module" src="/api.js"></script>
+   
+</body>
+</html>
