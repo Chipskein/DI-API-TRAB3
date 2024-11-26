@@ -40,6 +40,7 @@ import {getFeriados,getCidade} from './api.js';
             console.log('cidadeJSON:',cidadeJSON);
             const p=document.createElement('p');
             p.textContent=`Cidade não encontrada`;
+            p.style.color='red';
             divCidade.appendChild(p);
             return;
         }
@@ -53,6 +54,9 @@ import {getFeriados,getCidade} from './api.js';
     
     select.addEventListener('change',()=>{
         console.log('select:',select.value);
+        while (divPais.firstChild) {
+            divPais.firstChild.remove();
+        }
         //destructuring
         const [pais]=paises.filter(({sigla})=>sigla===select.value)
         if(!pais){
