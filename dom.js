@@ -11,7 +11,7 @@ import {getFeriados,getCidade} from './api.js';
     if(!paises){
         return;
     }
-    //map
+    //map destructuring
     paises.map(({sigla,nome_pais})=>{
         const option=document.createElement('option');
         option.value=sigla;
@@ -23,7 +23,7 @@ import {getFeriados,getCidade} from './api.js';
     if(!feriados){
         return;
     }
-    //map
+    //map destructuring
     feriados.map(({name,date})=>{
         const p=document.createElement('p');
         p.textContent=`${name}:${date}`;
@@ -43,7 +43,7 @@ import {getFeriados,getCidade} from './api.js';
             divCidade.appendChild(p);
             return;
         }
-        //map
+        //map destructuring
         cidadeJSON.map(({nome,estado})=>{
             const p=document.createElement('p');
             p.textContent=`${nome}-${estado}`;
@@ -53,11 +53,13 @@ import {getFeriados,getCidade} from './api.js';
     
     select.addEventListener('change',()=>{
         console.log('select:',select.value);
+        //destructuring
         const [pais]=paises.filter(({sigla})=>sigla===select.value)
         if(!pais){
             return;
         }
         console.log('pais:',pais);
+        //destructuring
         const {sigla,nome_pais,nome_pais_int,gentilico}=pais;
         divPais.innerHTML=`<p>Sigla:${sigla}</p><p>Nome:${nome_pais}</p><p>Nome Internacional:${nome_pais_int}</p><p>Gentílico:${gentilico}`;
         
