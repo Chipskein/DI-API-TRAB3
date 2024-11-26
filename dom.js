@@ -4,8 +4,9 @@ import {getFeriados,getCidade} from './api.js';
     const select=document.getElementById('pais');
     const feriadosDiv=document.getElementById('feriados');
     const consultarCidadeBtn=document.getElementById('consultar-cidade');
-    const cidadeInput=document.getElementById('cidade');
     const divCidade=document.getElementById('cidades');
+    const cidadeInput=document.getElementById('cidade');
+    const divPais=document.getElementById('dado-pais');
     const paises=await readCountryJSON();
     if(!paises){
         return;
@@ -30,14 +31,16 @@ import {getFeriados,getCidade} from './api.js';
     })
 
     consultarCidadeBtn.addEventListener('click',async()=>{
-        for(let i=0;i<divCidade.children.length;i++){
-            divCidade.children[i].remove();
+        while (divCidade.firstChild) {
+            divCidade.firstChild.remove();
         }
         const cidade=cidadeInput.value;
         const cidadeJSON=await getCidade(cidade);
-        if(!cidadeJSON){
+        if(!cidadeJSON || cidadeJSON.type==='city_error'){
             console.log('cidadeJSON:',cidadeJSON);
-
+            const p=document.createElement('p');
+            p.textContent=`Cidade não encontrada`;
+            divCidade.appendChild(p);
             return;
         }
         //map
@@ -48,5 +51,17 @@ import {getFeriados,getCidade} from './api.js';
         })
     })
     
+    select.addEventListener('change',()=>{
+        console.log('select:',select.value);
+        const [pais]=paises.filter(({sigla})=>sigla===select.value)
+        if(!pais){
+            return;
+        }
+        console.log('pais:',pais);
+        const {sigla,nome_pais,nome_pais_int,gentilico}=pais;
+        divPais.innerHTML=`<p>Sigla:${sigla}</p><p>Nome:${nome_pais}</p><p>Nome Internacional:${nome_pais_int}</p><p>Gentílico:${gentilico}`;
+        
+
+    })
 
 })()
